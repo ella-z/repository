@@ -52,44 +52,44 @@ proxy({
 - 源码：
    - Ajax-hook 一开始先保存了真正的XMLHttpRequest对象到一个全局对象，然后在注释1处，Ajax-hook覆盖了全局的XMLHttpRequest对象，这就是代理对象的具体实现。在代理对象内部，首先创建真正的XMLHttpRequest实例,记为xhr,然后遍历xhr所有属性和方法，在2处hookfun为xhr的每一个方法生成一个代理方法，在3处，通过defineProperty为每一个属性生成一个代理属性。
    ```
-   ob.hookAjax = function (funs) {
-     //保存真正的XMLHttpRequest对象
-     window._ahrealxhr = window._ahrealxhr || XMLHttpRequest
-     //1.覆盖全局XMLHttpRequest，代理对象
-     XMLHttpRequest = function () {
-       //创建真正的XMLHttpRequest实例
-       this.xhr = new window._ahrealxhr;
-       for (var attr in this.xhr) {
-         var type = "";
-         try {
-           type = typeof this.xhr[attr]
-         } catch (e) {}
-         if (type === "function") {
-           //2.代理方法
-           this[attr] = hookfun(attr);
-         } else {
-           //3.代理属性
-           Object.defineProperty(this, attr, {
-             get: getFactory(attr),
-             set: setFactory(attr)
-           })
-         }
+      ob.hookAjax = function (funs) {
+        //保存真正的XMLHttpRequest对象
+        window._ahrealxhr = window._ahrealxhr || XMLHttpRequest
+        //1.覆盖全局XMLHttpRequest，代理对象
+        XMLHttpRequest = function () {
+          //创建真正的XMLHttpRequest实例
+          this.xhr = new window._ahrealxhr;
+          for (var attr in this.xhr) {
+            var type = "";
+            try {
+              type = typeof this.xhr[attr]
+            } catch (e) {}
+            if (type === "function") {
+              //2.代理方法
+              this[attr] = hookfun(attr);
+            } else {
+              //3.代理属性
+              Object.defineProperty(this, attr, {
+                get: getFactory(attr),
+                set: setFactory(attr)
+              })
+            }
+          }
+        }
+      ```
+      - 代理方法
+      ```
+      function hookfun(fun) {
+       return function () {
+          var args = [].slice.call(arguments)
+          //1.如果fun拦截函数存在，则先调用拦截函数
+          if (funs[fun] && funs[fun].call(this, args, this.xhr)) {
+            return;
+          }
+         //2.调用真正的xhr方法
+         this.xhr[fun].apply(this.xhr, args);
        }
-     }
-   ```
-   - 代理方法
-   ```
-   function hookfun(fun) {
-    return function () {
-       var args = [].slice.call(arguments)
-       //1.如果fun拦截函数存在，则先调用拦截函数
-       if (funs[fun] && funs[fun].call(this, args, this.xhr)) {
-         return;
-       }
-      //2.调用真正的xhr方法
-      this.xhr[fun].apply(this.xhr, args);
-    }
-   }
+      }
    ```
 ### Ajax-hook的API
 - proxy(proxyObject)
