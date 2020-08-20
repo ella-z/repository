@@ -141,6 +141,8 @@ proxy({
 ### 浏览器兼容性
 - 需要在支持ES5的浏览器环境中运行(不支持IE8)。
 
-
+### 参考
+- [Ajax-hook](https://github.com/wendux/Ajax-hook)
+- [Ajax-hook原理](http://www.jianshu.com/p/7337ac624b8e)
 
 
