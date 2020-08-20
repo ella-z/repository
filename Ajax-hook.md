@@ -76,21 +76,21 @@ proxy({
             }
           }
         }
-      ```
-      - 代理方法
-      ```
-      function hookfun(fun) {
-       return function () {
-          var args = [].slice.call(arguments)
-          //1.如果fun拦截函数存在，则先调用拦截函数
-          if (funs[fun] && funs[fun].call(this, args, this.xhr)) {
-            return;
-          }
-         //2.调用真正的xhr方法
-         this.xhr[fun].apply(this.xhr, args);
-       }
-      }
    ```
+   - 代理方法
+      ```
+         function hookfun(fun) {
+          return function () {
+             var args = [].slice.call(arguments)
+             //1.如果fun拦截函数存在，则先调用拦截函数
+             if (funs[fun] && funs[fun].call(this, args, this.xhr)) {
+               return;
+             }
+            //2.调用真正的xhr方法
+            this.xhr[fun].apply(this.xhr, args);
+          }
+         }
+      ```
 ### Ajax-hook的API
 - proxy(proxyObject)
    - 拦截全局XMLHttpRequest。
