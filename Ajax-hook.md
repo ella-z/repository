@@ -46,3 +46,10 @@ proxy({
     }
 })
 ```
+### Ajax-hook实现原理
+- 整体思路是实现一个XMLHttpRequest的代理对象，然后覆盖全局的XMLHttpRequest，这样一但上层调用 new XMLHttpRequest这样的代码时，其实创建的是Ajax-hook的代理对象实例。
+
+
+
+
+
