@@ -30,5 +30,7 @@
    - 下拉加载
    - 埋点
    - ......
+- 注意点：
+   - IntersectionObserver API 是异步的，不随着目标元素的滚动同步触发。
 - 参考：
    - [Intersection Observer](https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver)
