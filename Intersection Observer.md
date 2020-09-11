@@ -29,6 +29,6 @@
    - 图片懒加载
    - 下拉加载
    - 埋点
-   ......
+   - ......
 - 参考：
    - [Intersection Observer](https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver)
