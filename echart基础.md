@@ -65,7 +65,8 @@
 - hoverLayerThreshold：图形数量阈值，决定是否开启单独的hover层。
 - useUTC：是否使用UTC时间。
    
-   
+### 参考
+- [echart](https://echarts.apache.org/zh/index.html)
    
    
    
