@@ -50,6 +50,23 @@
    - pictorialBar：象形柱图
    - themeRiver：主题河流，一种特殊的流图。
    - custom：自定义系列
+- series的其他属性：
+   - roam：是否开启鼠标滚轮放大缩小。
+   - symbolSize：节点的大小。
+   - layout：图的布局，主要有三种布局：
+      - none：不采用任何布局，使用节点中提供的x，y作为节点的位置。
+      - circular：采用环形布局。
+      - force：采用力引布局。
+   - edgeSymbol：边两端的标记类型，可以是个数组分别指定两端，也可以单个统一。默认为['none', 'none']，可以设置成箭头['circle', 'arrow']。
+   - edgeSymbolSize：边两端的标记大小。
+   - data:数据。
+   - links:关系,是个数组，里面有关系对象。
+      - source：来源
+      - target：目标节点
+   - lineStyle：连线的样式，可以在links中统一设置，也可以在各个连线里面分别设置。
+         - width：宽度。
+         - opacity：透明度。
+         - curveness：线的弯曲程度。
 - color：调色盘颜色列表
 - backgroundColor：背景色
 - textStyle：全局字体样式
